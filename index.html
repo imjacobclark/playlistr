@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Playlistr</title>
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <script>
+      System.config({
+        packages: {
+          bin: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('bin/boot')
+            .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+
+  <body>
+    <playlistr>Loading...</playlistr>
+  </body>
+
+</html>
