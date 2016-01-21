@@ -17,7 +17,7 @@ import {Http, Headers} from 'angular2/http';
 })
 export class AppComponent {
     result: Object;
-    releases: Array;
+    releases: Array<Object>;
 
     constructor(http: Http) {
         this.result = {};
@@ -27,7 +27,7 @@ export class AppComponent {
             )
             .subscribe(
                 data => this.result = JSON.parse(data.text()),
-                err => this.logError(err.text()),
+                err => console.log(err),
                 () => this.filterSingles(this.result)
             );
     }
