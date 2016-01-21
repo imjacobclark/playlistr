@@ -6,10 +6,13 @@ import {Http, Headers} from 'angular2/http';
     template: `
         <h1>Playlistr</h1>
         <ul>
-            <li *ngFor="#release of releases">
+            <li *ngFor="#release of releases" >
                 {{release.basic_information.title}}
+                -
+                <strong>{{release.basic_information.artists[0].name}}</strong>
             </li>
         </ul>
+        <p>&copy; Playlistr</p>
     `,
 })
 export class AppComponent {
@@ -25,12 +28,16 @@ export class AppComponent {
             .subscribe(
                 data => this.result = JSON.parse(data.text()),
                 err => this.logError(err.text()),
-                () => this.gotRecords(this.result)
+                () => this.filterSingles(this.result)
             );
     }
 
-    gotRecords(records){
-        this.releases = records.releases;
+    filterSingles(records){
+        this.releases = records.releases.filter(
+            record => record.basic_information.formats[0].descriptions.some(
+                description => description === 'Single' || description === '7"'
+            )
+        )
     }
 
 }
