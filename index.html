@@ -10,11 +10,17 @@
 
     <script>
       System.config({
+        map: {
+            rxjs: 'node_modules/rxjs'
+        },
         packages: {
-          bin: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
+            bin: {
+                format: 'register',
+                defaultExtension: 'js'
+            },
+            'rxjs': {
+                defaultExtension: 'js'
+            }
         }
       });
       System.import('bin/boot')
