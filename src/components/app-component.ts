@@ -1,33 +1,43 @@
 import {Component} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 
+import {DiscogsUsernameInput} from './discogs-username-input-component';
+
 import {Record} from '../models/record-model';
+import {User} from '../models/user-model';
+
 import {RecordsService} from '../services/records-service';
+import {RecordItemRenderer} from '../renderers/record-item-renderer';
 
 import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'playlistr',
+    directives: [RecordItemRenderer],
     template: `
-        <h1>Playlistr</h1>
-        <p>Here is your playlist!</p>
-        <ul>
+        <form (submit)="onSubmit()">
+            <label for="username">Enter your Discogs username:</label>
+            <input type="text" placeholder="username" name="username" [(ngModel)]="user.username">
+        </form>
+
+        <ul *ngIf="user.username !== ''">
             <li *ngFor="#record of singles">
-                {{record.recordTitle}}
-                -
-                <strong>{{record.recordArtist}}</strong>
+                <record-item-renderer [record]="record"></record-item-renderer>
             </li>
         </ul>
-        <p>&copy; Playlistr</p>
     `
 })
 export class AppComponent {
     public singles: Array<Record> = [];
+    public user: User = new User();
 
-    constructor(http: Http, public recordsService: RecordsService) {
+    constructor(public http: Http, public recordsService: RecordsService) {}
+
+    onSubmit(){
         let result: Object = {};
+        this.singles = [];
 
-        http
+        this.http
             .get(
                 'https://api.discogs.com/users/imjacobclark/collection/folders/0/releases'
             )
