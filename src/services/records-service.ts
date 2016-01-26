@@ -3,5 +3,6 @@ import {Record} from '../models/record-model';
 
 @Injectable()
 export class RecordsService{
-    records: Array<Record> = [];
+    allRecords: Array<Record> = [];
+    singles: Array<Record> = [];
 }

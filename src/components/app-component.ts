@@ -1,8 +1,6 @@
 import {Component} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 
-import {DiscogsUsernameInput} from './discogs-username-input-component';
-
 import {Record} from '../models/record-model';
 import {User} from '../models/user-model';
 
@@ -21,7 +19,7 @@ import 'rxjs/add/operator/map';
         </form>
 
         <ul *ngIf="user.username !== ''">
-            <li *ngFor="#record of singles">
+            <li *ngFor="#record of recordsService.singles">
                 <record-item-renderer [record]="record"></record-item-renderer>
             </li>
         </ul>
@@ -35,7 +33,8 @@ export class AppComponent {
 
     onSubmit(){
         let result: Object = {};
-        this.singles = [];
+
+        this.recordsService.singles = [];
 
         this.http
             .get(
@@ -47,9 +46,9 @@ export class AppComponent {
                 )
             )
             .subscribe(
-                data => data.forEach(record => this.recordsService.records.push(record)),
+                data => data.forEach(record => this.recordsService.allRecords.push(record)),
                 err => console.log(err),
-                () => this.filterSingles(this.recordsService.records)
+                () => this.filterSingles(this.recordsService.allRecords)
             );
     }
 
@@ -63,7 +62,7 @@ export class AppComponent {
 
             if(recordsInPlaylist.indexOf(selectedRecord) === -1){
                 if(records[selectedRecord].isSingle === true){
-                    this.singles.push(records[selectedRecord]);
+                    this.recordsService.singles.push(records[selectedRecord]);
                     recordsInPlaylist.push(selectedRecord);
                     i++;
                 }
