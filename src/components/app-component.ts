@@ -5,6 +5,8 @@ import {Record} from '../models/record-model';
 import {User} from '../models/user-model';
 
 import {RecordsService} from '../services/records-service';
+import {UserService} from '../services/user-service';
+
 import {RecordItemRenderer} from '../renderers/record-item-renderer';
 
 import 'rxjs/add/operator/map';
@@ -38,7 +40,7 @@ export class AppComponent {
 
         this.http
             .get(
-                'https://api.discogs.com/users/imjacobclark/collection/folders/0/releases'
+                'https://api.discogs.com/users/' + this.user.username + '/collection/folders/0/releases'
             )
             .map(
                 record => JSON.parse(record['_body']).releases.map(
