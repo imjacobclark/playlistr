@@ -17,10 +17,12 @@ import {Subject} from 'rxjs/Subject';
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <p class="text-muted">To create your playlist, enter your Discogs username below, then press enter!</p>
+                        
                         <form class="form-horizontal input" role="form" (submit)="onSubmit()">
                             <div class="form-group username-input">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="A Discogs username (e.g: imjacobclark)" [(ngModel)]="user.username">
+                                    <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="Username" [(ngModel)]="user.username">
                                 </div>
                             </div>
                         </form>
