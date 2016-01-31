@@ -1,41 +1,66 @@
-<html>
-  <head>
-    <title>Playlistr</title>
+<html><head>
+        <title>Playlistr</title>
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+        <script src="node_modules/angular2/bundles/http.dev.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="Playlistr.css" rel="stylesheet" type="text/css">
+        <script>
+            System.config({
+                map: {
+                    rxjs: 'node_modules/rxjs'
+                },
+                packages: {
+                    bin: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    },
+                    'rxjs': {
+                        defaultExtension: 'js'
+                    }
+                }
+              });
+              System.import('bin/boot')
+                    .then(null, console.error.bind(console));
+        </script>
+    </head><body class="background-image">
+        <div class="section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="text-muted">Playlistr</h1>
+                        <p class="text-muted">Playlists created just for you from your 7" collection!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <playlistr>
+            <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                         <p class="text-muted">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div></playlistr>
+        
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted">© Jacob Clark 2016</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
 
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
-
-    <script>
-      System.config({
-        map: {
-            rxjs: 'node_modules/rxjs'
-        },
-        packages: {
-            bin: {
-                format: 'register',
-                defaultExtension: 'js'
-            },
-            'rxjs': {
-                defaultExtension: 'js'
-            }
-        }
-      });
-      System.import('bin/boot')
-            .then(null, console.error.bind(console));
-    </script>
-
-  </head>
-
-  <body>
-    <h1>Playlistr</h1>
-    <p>Here is your playlist!</p>
-
-    <playlistr>Hang tight, we're grabbing fresh data from <a href="http://discogs.com/">Discogs</a>!</playlistr>
-
-    <p>&copy; Playlistr</p>
-  </body>
-
-</html>
+</body></html>

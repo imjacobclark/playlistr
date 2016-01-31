@@ -12,10 +12,21 @@ import 'rxjs/add/operator/map';
 @Component({
     selector: 'discogs-username-input-component',
     template: `
-        <form (submit)="onSubmit()">
-            <label for="username">Enter your Discogs username:</label>
-            <input type="text" placeholder="username" name="username" [(ngModel)]="user.username">
-        </form>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal input" role="form" (submit)="onSubmit()">
+                            <div class="form-group username-input">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="Your Discogs username" [(ngModel)]="user.username">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     `
 })
 export class DiscogsUsernameInputComponent {

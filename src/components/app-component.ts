@@ -18,12 +18,20 @@ import 'rxjs/add/operator/map';
     directives: [RecordItemRenderer, DiscogsUsernameInputComponent],
     template: `
         <discogs-username-input-component></discogs-username-input-component>
-        
-        <ul *ngIf="userService.user.username !== ''">
-            <li *ngFor="#record of recordsService.singles">
-                <record-item-renderer [record]="record"></record-item-renderer>
-            </li>
-        </ul>
+       
+        <div class="section" style="background-color: rgba(0, 0, 0, 0.5); " *ngIf="userService.user.username !== ''">
+            <div class="container">
+                <div class="row" *ngFor="#record of recordsService.singles">
+                    <record-item-renderer [record]="record"></record-item-renderer>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     `
 })
 export class AppComponent {
