@@ -1,11 +1,10 @@
-
 'use strict';
 
 let express = require('express'),
     app = express(),
-   request = require('request'),
-   compression = require('compression'),
-   oneHour = 3600000;
+    request = require('request'),
+    compression = require('compression'),
+    oneHour = 3600000;
    
 app.use(express.static('./', { maxAge: oneHour }));
 app.use(compression());
