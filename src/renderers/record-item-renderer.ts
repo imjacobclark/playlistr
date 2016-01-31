@@ -6,7 +6,7 @@ import {Component, Input} from 'angular2/core';
         <div class="col-md-9">
             <h1> {{record.recordTitle}}</h1>
             <h3>{{record.recordArtist}}</h3>
-            <p>
+            <p class="hidden-xs hidden-sm">
                 <strong>Label</strong>: {{record.recordLabel}} <br />
                 <strong>Genre</strong>: {{record.recordGenre}} <br />
                 <strong>Released</strong>: {{record.recordYear}} <br />
@@ -15,7 +15,7 @@ import {Component, Input} from 'angular2/core';
             </p>
         </div>
         <div class="col-md-3">
-            <img src="{{record.image}}" class="center-block hidden-xs hidden-sm hidden-s img-circle img-responsive">
+            <img src="{{record.image}}" class="center-block hidden-xs hidden-sm img-circle img-responsive">
         </div>
     `
 })

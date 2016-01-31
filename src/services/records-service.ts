@@ -14,7 +14,7 @@ export class RecordsService{
         this.singles = [];
         
         if(this.allRecords.length > 0){
-            while(i <= 4){
+            while(i <= 9){
                 let selectedRecord = Math.floor(Math.random() * sizeOfCollection) + 0;
                     if(recordsInPlaylist.indexOf(selectedRecord) === -1){
                         if(this.allRecords[selectedRecord].isSingle === true){

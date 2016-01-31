@@ -1,11 +1,14 @@
 
 'use strict';
 
-var express = require('express'),
+let express = require('express'),
     app = express(),
-   request = require('request');
+   request = require('request'),
+   compression = require('compression'),
+   oneHour = 3600000;
    
-app.use(express.static('./'));
+app.use(express.static('./', { maxAge: oneHour }));
+app.use(compression());
 app.listen(3000);
 
 app.get('/proxy', function(req, res){
