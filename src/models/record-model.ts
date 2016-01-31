@@ -1,6 +1,10 @@
 export class Record{
     recordTitle: string;
     recordArtist: string;
+    recordLabel: string;
+    recordGenre: string;
+    recordCountry: string;
+    recordWeight: number;
     recordFormats: Array<String>;
     recordYear: number;
     resourceUrl: string;

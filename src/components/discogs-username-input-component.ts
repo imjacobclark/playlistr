@@ -7,7 +7,7 @@ import {User} from '../models/user-model';
 import {RecordsService} from '../services/records-service';
 import {UserService} from '../services/user-service';
 
-import {Config} from '../config';
+import {Config} from '../../config';
 
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -22,7 +22,7 @@ import {Subject} from 'rxjs/Subject';
                         <form class="form-horizontal input" role="form" (submit)="onSubmit()">
                             <div class="form-group username-input">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="Your Discogs username" [(ngModel)]="user.username">
+                                    <input type="text" class="form-control input-lg" id="inputEmail3" placeholder="A Discogs username (e.g: imjacobclark)" [(ngModel)]="user.username">
                                 </div>
                             </div>
                         </form>
@@ -35,6 +35,7 @@ import {Subject} from 'rxjs/Subject';
 export class DiscogsUsernameInputComponent {
     public singles: Array<Record> = [];
     public user: User = new User();
+    private config = new Config();
 
     constructor(
         public http: Http, 
@@ -61,12 +62,16 @@ export class DiscogsUsernameInputComponent {
                     record => {
                          this.http
                             .get(
-                                record.resourceUrl + '?key=' + Config.getConfig().key + '&secret=' + Config.getConfig().secret + ''
+                                record.resourceUrl + '?key=' + this.config.getConfig().key + '&secret=' + this.config.getConfig().secret + ''
                             )
                             .subscribe(
                                 data => {
-                                    record.notes = JSON.parse(data['_body']).notes
-                                    record.image = JSON.parse(data['_body']).images[0].uri
+                                    record.notes = JSON.parse(data['_body']).notes;
+                                    record.image = JSON.parse(data['_body']).images[0].uri;
+                                    record.recordLabel = JSON.parse(data['_body']).labels[0].name;
+                                    record.recordGenre = JSON.parse(data['_body']).genres[0];
+                                    record.recordCountry = JSON.parse(data['_body']).country;
+                                    record.recordWeight = JSON.parse(data['_body']).estimated_weight
                                 },
                                 err => console.log(err),
                                 () => false
