@@ -7,8 +7,6 @@ import {User} from '../models/user-model';
 import {RecordsService} from '../services/records-service';
 import {UserService} from '../services/user-service';
 
-import {Config} from '../../config';
-
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
@@ -35,7 +33,6 @@ import {Subject} from 'rxjs/Subject';
 export class DiscogsUsernameInputComponent {
     public singles: Array<Record> = [];
     public user: User = new User();
-    private config = new Config();
 
     constructor(
         public http: Http, 
@@ -50,7 +47,7 @@ export class DiscogsUsernameInputComponent {
         
         this.http
             .get(
-                'https://api.discogs.com/users/' + this.user.username + '/collection/folders/0/releases'
+                '/proxy?url=https://api.discogs.com/users/' + this.user.username + '/collection/folders/0/releases'
             )
             .map(
                 record => JSON.parse(record['_body']).releases.map(
@@ -62,7 +59,7 @@ export class DiscogsUsernameInputComponent {
                     record => {
                          this.http
                             .get(
-                                record.resourceUrl + '?key=' + this.config.getConfig().key + '&secret=' + this.config.getConfig().secret + ''
+                                '/proxy?url=' + record.resourceUrl
                             )
                             .subscribe(
                                 data => {
