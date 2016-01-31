@@ -26,7 +26,6 @@ export class RecordsService{
                 }
             }
 
-console.log(this.singles)
         return this.singles;
     }
 }

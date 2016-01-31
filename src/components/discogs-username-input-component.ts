@@ -7,7 +7,10 @@ import {User} from '../models/user-model';
 import {RecordsService} from '../services/records-service';
 import {UserService} from '../services/user-service';
 
-import 'rxjs/add/operator/map';
+import {Config} from '../config';
+
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
     selector: 'discogs-username-input-component',
@@ -54,7 +57,24 @@ export class DiscogsUsernameInputComponent {
                 )
             )
             .subscribe(
-                data => data.forEach(record => this.recordsService.allRecords.push(record)),
+                data => data.forEach(
+                    record => {
+                         this.http
+                            .get(
+                                record.resourceUrl + '?key=' + Config.getConfig().key + '&secret=' + Config.getConfig().secret + ''
+                            )
+                            .subscribe(
+                                data => {
+                                    record.notes = JSON.parse(data['_body']).notes
+                                    record.image = JSON.parse(data['_body']).images[0].uri
+                                },
+                                err => console.log(err),
+                                () => false
+                            );
+                        
+                        this.recordsService.allRecords.push(record)
+                    }
+                 ),
                 err => console.log(err),
                 () => this.recordsService.filterSingles()
             );
